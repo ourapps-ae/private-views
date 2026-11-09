@@ -1,0 +1,73 @@
+{
+  "id": "private-views",
+  "type": "ae/private-views",
+  "version": "1.0.0",
+  "operations": {
+    "viewFor": {
+      "arguments": [
+        "state:S",
+        "viewer:{id:string|null,role:participant|spectator|display}",
+        "policy:Policy<S,V>"
+      ],
+      "returns": "V (a copy of the state, projected and concealed; the state is not changed)"
+    },
+    "viewerOf": {
+      "arguments": [
+        "role:participant|spectator|display",
+        "id:string|null"
+      ],
+      "returns": "Viewer (a display never has an id)"
+    },
+    "isNewer": {
+      "arguments": [
+        "incoming:ViewEnvelope",
+        "current:ViewEnvelope|null"
+      ],
+      "returns": "boolean"
+    },
+    "newer": {
+      "arguments": [
+        "incoming:V",
+        "current:V|null"
+      ],
+      "returns": "V"
+    },
+    "matchesMode": {
+      "arguments": [
+        "view:ViewEnvelope",
+        "mode:player|display"
+      ],
+      "returns": "boolean"
+    },
+    "accept": {
+      "arguments": [
+        "incoming:V",
+        "current:V|null",
+        "mode:player|display"
+      ],
+      "returns": "V|null"
+    },
+    "isOwn": {
+      "arguments": [
+        "view:ViewEnvelope",
+        "id:string"
+      ],
+      "returns": "boolean"
+    },
+    "redact": {
+      "arguments": [
+        "viewerId:string|null",
+        "records:HiddenRecord[]"
+      ],
+      "returns": "Record<string,unknown>[] (one per record, same order: open facts plus each hidden key as its value if the viewer owns the record or the key is revealed, else null; a revealed index list keeps those elements of an array and nulls the rest; a null viewer is a display and sees only what is revealed; server)"
+    }
+  },
+  "types": {
+    "Policy": "{rules:Rule[],conditions?:{[name]:(context)=>boolean},project?:(state)=>V,youField?:string,displayField?:string,decorate?:(view,state,viewer)=>V}",
+    "Rule": "{at:string,owner?:string,elements?:boolean,conceal?:null|remove|mask,mask?:any,reveal?:Reveal[]}",
+    "Reveal": "{kind:owner}|{kind:roles,roles:Role[]}|{kind:listedIndexes,field:string}|{kind:flag,field:string,equals?:any}|{kind:when,condition:string}",
+    "rule path": "'field' or 'a.b' for a field of the state; 'items[].field' for a field of every element of the array 'items'",
+    "ViewEnvelope": "{version:integer,roomId:string,you:string,display?:boolean}",
+    "HiddenRecord": "{ownerId:string|null,open:Record<string,unknown>,hidden:Record<string,unknown>,revealed:Record<string,true|number[]>} (facts grouped by owner: open ones everyone sees, hidden ones only the owner sees until revealed)"
+  }
+}

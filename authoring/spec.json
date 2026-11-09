@@ -1,0 +1,120 @@
+{
+  "name": "private-views",
+  "version": "0.3.0",
+  "title": "Private views",
+  "description": "Sends each viewer only what they may see, by a policy of hidden fields and reveal conditions.",
+  "facilities": [
+    {
+      "id": "private-views",
+      "description": "Policy-driven per-viewer redaction and client view helpers"
+    }
+  ],
+  "provides": [
+    {
+      "id": "private-views",
+      "type": "ae/private-views",
+      "version": "1.0.0",
+      "path": "interfaces/private-views.json"
+    }
+  ],
+  "requires": [],
+  "collect": [],
+  "platforms": [
+    "server",
+    "web",
+    "apple",
+    "android"
+  ],
+  "tools": {
+    "node": "26.5.0",
+    "python3": "3.12.8",
+    "swiftc": "6.4.2",
+    "kotlinc": "2.2.0",
+    "java": "26.0.1"
+  },
+  "suites": [
+    {
+      "id": "web",
+      "argv": [
+        "node",
+        "--test",
+        "tests/web.test.ts"
+      ],
+      "tools": {
+        "node": "26.5.0"
+      },
+      "scope": "required-local",
+      "fixtures": [
+        "examples/consumer.ts",
+        "tests/fixtures/state.json",
+        "tests/fixtures/views.json"
+      ]
+    },
+    {
+      "id": "apple",
+      "argv": [
+        "python3",
+        "tests/native.py",
+        "apple"
+      ],
+      "tools": {
+        "python3": "3.12.8",
+        "swiftc": "6.4.2"
+      },
+      "fixtures": [
+        "tests/apple/main.swift"
+      ],
+      "scope": "platform"
+    },
+    {
+      "id": "android",
+      "argv": [
+        "python3",
+        "tests/native.py",
+        "android"
+      ],
+      "tools": {
+        "python3": "3.12.8",
+        "kotlinc": "2.2.0",
+        "java": "26.0.1"
+      },
+      "fixtures": [
+        "tests/android/Main.kt"
+      ],
+      "scope": "platform"
+    }
+  ],
+  "infrastructure": {
+    "accounts": [],
+    "deployedReason": "Local library; no service is deployed by this package."
+  },
+  "text": {
+    "purpose": "`private-views` makes the one thing every shared activity with secrets needs: a function `viewFor(state, viewer, policy)` that returns what one viewer may see. The policy lists hidden fields (`players[].cards`, `deck`, `table.secret`), who may see each one (its owner, listed roles, listed array positions, a flag on the item, or a named condition of the policy) and how it is concealed (set to null, removed or masked; per element for arrays). Viewers are participants, spectators and displays; a display never has an id, so it can never count as an owner. The state is never changed. The same component carries the small client side: the envelope every view has (version, room, who it is for, whether it is a display) and the rule for which arriving view to keep. Records grouped by owner (a game's per-player hidden facts) are redacted by `redact(viewerId, records)`, the form the turn engine uses.",
+    "userInputs": "No installer settings. The policy is supplied by the application or by the component that owns the state (for example the game rules component).",
+    "integration": "Server: define one `Policy` for the state type and call `viewFor(state, viewerOf(role, id), policy)` once per connection when the state changes; send each connection its own result. Use `project` to build the view shape from the state, `decorate` to add what only this viewer gets (legal actions, a prompt), and `youField` and `displayField` to tell the client who it is. Clients: `accept(incoming, current, mode)` (web) or `PrivateViews.isNewer` and `matchesMode` (Apple) and `isNewer` and `matchesMode` (Android) keep the newest view and refuse a player view on a display connection and the reverse. `examples/consumer.ts` shows a card table. The turn-engine uses this component through its `private-views` requirement. `redact(viewerId, records)` (server) is the record form: each `HiddenRecord` has an owner, open facts everyone sees, hidden facts only the owner sees, and a `revealed` map naming hidden keys now public (`true`, or the indexes of an array); a null viewer is a display and sees only revealed facts.",
+    "infrastructure": "No service. Pure functions.",
+    "verification": "Required-local: `node --test tests/web.test.ts` checks owners, spectators and displays, removal, nulling, masking and filtering of hidden fields, reveal by listed positions, flags and conditions, roles, projection, decoration, that the state is unchanged, a scan that no viewer's serialised view contains another participant's secrets, `redact` (owner, other viewer, display, revealed index lists, copies, a no-leak scan over every viewer), the client's newest-view and mode rules and the example. Platform: `python3 tests/native.py apple` compiles and runs the Swift envelope checks against `tests/fixtures/views.json`; `python3 tests/native.py android` compiles the Kotlin checks (needs kotlinc, not installed on the authoring machine, so not run there).",
+    "scenarios": "A card table sends Ann her own cards and face-down placeholders for Bob's, except the card Bob has shown. A spectator and a table display see the same public view, and a display whose connection carries a participant id still sees nothing private. At the end of a round a condition reveals every score to everyone. A late reply to an action arrives after a newer pushed view and is ignored.",
+    "updates": "Patch updates replace files; no persisted-state migration. A policy change is a change to what leaves the server, so applications should re-run their no-leak test (the scan in this component's tests is a model) after changing one."
+  },
+  "agentInstructions": "Select this component for any application where participants hold information others must not see (hidden hands, private notes, hidden scores) or where a public screen must show less than a player's screen. Write the policy with the owner of the state. Connect `private-views` to the engine that builds per-connection messages.",
+  "developerInstructions": "Write one policy per state type and keep a no-leak test like the one in `tests/web.test.ts` for it: serialise every viewer's view and search it for the secrets of everyone else. Supply no accounts or keys.",
+  "suitability": {
+    "format": 1,
+    "jobs": [
+      "private-views"
+    ],
+    "profiles": [
+      {
+        "id": "any",
+        "load": {},
+        "cost": "none",
+        "regions": [
+          "any"
+        ],
+        "compliance": []
+      }
+    ],
+    "notes": "Pure functions. Cost grows with state size times viewers because each view is a deep copy."
+  }
+}

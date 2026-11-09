@@ -1,0 +1,19 @@
+{
+  "id": "ourapps-ae.private-views",
+  "name": "Private views",
+  "kind": "component",
+  "status": "example",
+  "package": "ourapps-ae/private-views",
+  "version": "0.3.0",
+  "ports": [
+    {
+      "id": "private-views",
+      "name": "Private views",
+      "direction": "output",
+      "kind": "interface",
+      "type": "ae/private-views",
+      "version": "1.0.0"
+    }
+  ],
+  "settings": []
+}

@@ -1,0 +1,11 @@
+{
+  "phase": "betting",
+  "deck": ["Qs", "7d", "2c"],
+  "table": { "secret": "dealer-seed-91", "open": "visible-label" },
+  "board": ["Td", "5h"],
+  "players": [
+    { "id": "p1", "name": "Ann", "cards": ["As", "Kh"], "shown": [], "score": 10, "note": "ann-secret-note", "faceUp": false },
+    { "id": "p2", "name": "Bob", "cards": ["2c", "2d"], "shown": [1], "score": 20, "note": "bob-secret-note", "faceUp": false },
+    { "id": "p3", "name": "Cy", "cards": ["9h", "9s"], "shown": [0, 1], "score": 30, "note": "cy-secret-note", "faceUp": true }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "id": "private-views-connected",
+  "title": "Private views: connected consumer",
+  "status": "example",
+  "view": "component",
+  "focus": "component",
+  "definitions": [
+    {
+      "id": "ourapps-ae.private-views",
+      "name": "Private views",
+      "kind": "component",
+      "status": "example",
+      "package": "ourapps-ae/private-views",
+      "version": "0.3.0",
+      "ports": [
+        {
+          "id": "private-views",
+          "name": "Private views",
+          "direction": "output",
+          "kind": "interface",
+          "type": "ae/private-views",
+          "version": "1.0.0"
+        }
+      ],
+      "settings": []
+    },
+    {
+      "id": "consumer",
+      "name": "Example application consumer",
+      "kind": "application",
+      "status": "example",
+      "revision": "0.1.0",
+      "ports": [
+        {
+          "id": "private-views",
+          "name": "Private views",
+          "direction": "input",
+          "kind": "interface",
+          "type": "ae/private-views",
+          "version": "1.0.0",
+          "required": true,
+          "cardinality": "one"
+        }
+      ],
+      "settings": []
+    }
+  ],
+  "instances": [
+    {
+      "id": "component",
+      "name": "Private views",
+      "definition": "ourapps-ae.private-views",
+      "configuration": {}
+    },
+    {
+      "id": "consumer",
+      "name": "Example consumer",
+      "definition": "consumer",
+      "configuration": {}
+    }
+  ],
+  "connections": [
+    {
+      "source": {
+        "instance": "component",
+        "port": "private-views"
+      },
+      "target": {
+        "instance": "consumer",
+        "port": "private-views"
+      }
+    }
+  ]
+}

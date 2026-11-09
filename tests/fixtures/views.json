@@ -1,0 +1,13 @@
+{
+  "cases": [
+    { "name": "no current view", "incoming": { "roomId": "a", "version": 1 }, "current": null, "newer": true },
+    { "name": "higher version, same room", "incoming": { "roomId": "a", "version": 5 }, "current": { "roomId": "a", "version": 4 }, "newer": true },
+    { "name": "same version", "incoming": { "roomId": "a", "version": 4 }, "current": { "roomId": "a", "version": 4 }, "newer": false },
+    { "name": "older version", "incoming": { "roomId": "a", "version": 3 }, "current": { "roomId": "a", "version": 4 }, "newer": false },
+    { "name": "other room, lower version", "incoming": { "roomId": "b", "version": 1 }, "current": { "roomId": "a", "version": 9 }, "newer": true }
+  ],
+  "modes": [
+    { "display": false, "player": true, "displayMode": false },
+    { "display": true, "player": false, "displayMode": true }
+  ]
+}
