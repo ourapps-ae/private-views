@@ -20,7 +20,7 @@ Dependencies: none.
 `tools.lock.json` pins verification tools: node 26.5.0, python3 3.12.8, swiftc 6.4.2, kotlinc 2.2.0, java 26.0.1. Licence wording remains deferred.
 
 ## Provided interfaces
-- `interfaces/private-views.json` defines `private-views` (ae/private-views) version 1.0.0.
+- `interfaces/private-views.json` defines `private-views` (ae/private-views) version 1.0.0 as an OpenRPC 1.3.2 document: one method per function, tagged with the languages that provide it (`typescript`, `swift`, `kotlin`), with the policy, rules, viewer, view envelope and hidden records as JSON Schema 2020-12.
 
 ## Required interfaces
 None.
