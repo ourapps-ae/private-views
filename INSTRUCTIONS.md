@@ -3,7 +3,7 @@
 ## For the agent
 Select this component for any application where participants hold information others must not see (hidden hands, private notes, hidden scores) or where a public screen must show less than a player's screen. Write the policy with the owner of the state. Connect `private-views` to the engine that builds per-connection messages.
 
-- Select package `ourapps-ae/private-views` version `0.4.0`.
+- Select package `ourapps-ae/private-views` version `0.4.1`.
 - No installer settings.
 - Connect the provided `private-views` (ae/private-views 1.0.0) to the consumer that needs it.
 - No accounts or keys are needed.

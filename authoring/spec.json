@@ -1,6 +1,6 @@
 {
   "name": "private-views",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "title": "Private views",
   "description": "Sends each viewer only what they may see, by a policy of hidden fields and reveal conditions.",
   "facilities": [
