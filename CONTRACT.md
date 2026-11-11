@@ -17,7 +17,7 @@ No installer settings. The policy is supplied by the application or by the compo
 - `implementation/web/views.ts` -> `components/private-views/web/views.ts`
 
 Dependencies: none.
-`tools.lock.json` pins verification tools: node 26.5.0, python3 3.12.8, swiftc 6.4.2, kotlinc 2.2.0, java 26.0.1. Licence wording remains deferred.
+`tools.lock.json` pins verification tools: node 26.5, python3 3.12, swiftc 6.4, kotlinc 2.2, java 26.0. Licence wording remains deferred.
 
 ## Provided interfaces
 - `interfaces/private-views.json` defines `private-views` (ae/private-views) version 1.0.0 as an OpenRPC 1.3.2 document: one method per function, tagged with the languages that provide it (`typescript`, `swift`, `kotlin`), with the policy, rules, viewer, view envelope and hidden records as JSON Schema 2020-12.
@@ -37,9 +37,9 @@ No service. Pure functions.
 ## Verification
 Required-local: `node --test tests/web.test.ts` checks owners, spectators and displays, removal, nulling, masking and filtering of hidden fields, reveal by listed positions, flags and conditions, roles, projection, decoration, that the state is unchanged, a scan that no viewer's serialised view contains another participant's secrets, `redact` (owner, other viewer, display, revealed index lists, copies, a no-leak scan over every viewer), the client's newest-view and mode rules and the example. Platform: `python3 tests/native.py apple` compiles and runs the Swift envelope checks against `tests/fixtures/views.json`; `python3 tests/native.py android` compiles the Kotlin checks (needs kotlinc, not installed on the authoring machine, so not run there).
 
-- `node --test tests/web.test.ts` (web, required-local; tools: node 26.5.0)
-- `python3 tests/native.py apple` (apple, platform; tools: python3 3.12.8, swiftc 6.4.2)
-- `python3 tests/native.py android` (android, platform; tools: python3 3.12.8, kotlinc 2.2.0, java 26.0.1)
+- `node --test tests/web.test.ts` (web, required-local; tools: node 26.5)
+- `python3 tests/native.py apple` (apple, platform; tools: python3 3.12, swiftc 6.4)
+- `python3 tests/native.py android` (android, platform; tools: python3 3.12, kotlinc 2.2, java 26.0)
 
 ## Scenarios and presentation
 A card table sends Ann her own cards and face-down placeholders for Bob's, except the card Bob has shown. A spectator and a table display see the same public view, and a display whose connection carries a participant id still sees nothing private. At the end of a round a condition reveals every score to everyone. A late reply to an action arrives after a newer pushed view and is ignored.
