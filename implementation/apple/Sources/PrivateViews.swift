@@ -13,7 +13,7 @@ extension ViewEnvelope {
     var isDisplay: Bool { display ?? false }
 }
 
-enum PrivateViews {
+public enum PrivateViews {
     // A view only replaces one from the same room with a lower version: an action's reply and the
     // pushed view can arrive in either order.
     static func isNewer<V: ViewEnvelope>(_ incoming: V, than current: V?) -> Bool {

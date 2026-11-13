@@ -13,9 +13,21 @@
       "template": false
     },
     {
+      "destination": "components/private-views/server/index.ts",
+      "executable": false,
+      "source": "implementation/server/index.ts",
+      "template": false
+    },
+    {
       "destination": "components/private-views/server/private-views.ts",
       "executable": false,
       "source": "implementation/server/private-views.ts",
+      "template": false
+    },
+    {
+      "destination": "components/private-views/web/index.ts",
+      "executable": false,
+      "source": "implementation/web/index.ts",
       "template": false
     },
     {
@@ -31,7 +43,9 @@
     "writes": [
       "components/private-views/android/src/main/java/ae/views/PrivateViews.kt",
       "components/private-views/apple/Sources/PrivateViews.swift",
+      "components/private-views/server/index.ts",
       "components/private-views/server/private-views.ts",
+      "components/private-views/web/index.ts",
       "components/private-views/web/views.ts"
     ]
   },
@@ -89,7 +103,15 @@
     },
     {
       "executable": false,
+      "path": "implementation/server/index.ts"
+    },
+    {
+      "executable": false,
       "path": "implementation/server/private-views.ts"
+    },
+    {
+      "executable": false,
+      "path": "implementation/web/index.ts"
     },
     {
       "executable": false,
