@@ -1,6 +1,6 @@
 {
   "name": "private-views",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "title": "Private views",
   "description": "Sends each viewer only what they may see, by a policy of hidden fields and reveal conditions.",
   "facilities": [
@@ -20,10 +20,10 @@
   "requires": [],
   "collect": [],
   "platforms": [
-    "server",
-    "web",
+    "android",
     "apple",
-    "android"
+    "server",
+    "web"
   ],
   "tools": {
     "node": "26.5.0",
@@ -116,5 +116,151 @@
       }
     ],
     "notes": "Pure functions. Cost grows with state size times viewers because each view is a deep copy."
+  },
+  "classes": [
+    {
+      "reference": {
+        "name": "ourapps-ae/private-views-class",
+        "version": "1.0.0",
+        "digest": "92705a0c0a3d88ee3059a88002e17a39a548cdb003618782e3c1be2f7015ed94"
+      },
+      "descriptor": {
+        "format": 1,
+        "name": "ourapps-ae/private-views-class",
+        "version": "1.0.0",
+        "provides": [
+          {
+            "type": "ae/private-views",
+            "version": "1.0.0",
+            "path": "classes/private-views-class/private-views.json",
+            "modules": {
+              "web": [
+                "web/index.ts"
+              ],
+              "server": [
+                "server/index.ts"
+              ],
+              "android": [
+                "android/src/main/java"
+              ],
+              "ios": [
+                "apple/Sources"
+              ],
+              "macos": [
+                "apple/Sources"
+              ],
+              "tvos": [
+                "apple/Sources"
+              ],
+              "windows": [
+                "web/index.ts"
+              ]
+            }
+          }
+        ],
+        "requires": [],
+        "settings": {
+          "type": "object",
+          "properties": {},
+          "required": [],
+          "additionalProperties": false
+        },
+        "inventory": [
+          {
+            "path": "classes/private-views-class/check.mjs",
+            "digest": "7a4e70f89ef7e67c03739f1b43cdc86ad62e716d540be9886dbd5788d9e98973"
+          },
+          {
+            "path": "classes/private-views-class/private-views.json",
+            "digest": "62d9d1929e88796c8b8e71180f5a437ee3bbe1e9f6f2abf3c31b9c1e723ca582"
+          },
+          {
+            "path": "classes/private-views-class/runtime.mjs",
+            "digest": "7440f3891614c423f74668cb5a2445fea58bbfa4d7c740c8e8a855d1d9300d43"
+          }
+        ],
+        "verification": [
+          {
+            "id": "shared",
+            "root": "package",
+            "argv": [
+              "node",
+              "classes/private-views-class/check.mjs"
+            ],
+            "cwd": ".",
+            "prepare": [],
+            "tools": {
+              "node": "26.5"
+            },
+            "fixtures": [
+              "classes/private-views-class/check.mjs"
+            ],
+            "locks": [],
+            "network": false,
+            "timeoutSeconds": 60,
+            "expectedExit": 0,
+            "scope": "required-local",
+            "requirements": []
+          }
+        ]
+      }
+    }
+  ],
+  "implements": [
+    {
+      "name": "ourapps-ae/private-views-class",
+      "version": "1.0.0",
+      "digest": "92705a0c0a3d88ee3059a88002e17a39a548cdb003618782e3c1be2f7015ed94"
+    }
+  ],
+  "upstream": [],
+  "compatibility": {
+    "runtimes": {
+      "node": ">=26.5.0 <27.0.0",
+      "swift": "=6.4.2",
+      "ios": ">=17.0.0",
+      "macos": ">=14.0.0",
+      "tvos": ">=17.0.0",
+      "kotlin": "=2.3.20",
+      "java": ">=17.0.0 <27.0.0",
+      "android": ">=8.0.0"
+    },
+    "frameworks": {},
+    "dependencies": [],
+    "styles": {
+      "scope": "none",
+      "namespaces": [],
+      "conflicts": []
+    }
+  },
+  "maintenance": {
+    "owners": [
+      "Level N Ltd"
+    ],
+    "contact": "https://github.com/ourapps-ae/private-views/issues",
+    "repository": "https://github.com/ourapps-ae/private-views",
+    "updates": {
+      "source": "https://github.com/ourapps-ae/private-views/releases",
+      "strategy": "manual"
+    }
+  },
+  "supportedPlatforms": [
+    "android",
+    "ios",
+    "macos",
+    "server",
+    "tvos",
+    "web",
+    "windows"
+  ],
+  "licence": "Apache-2.0",
+  "licenceFile": "LICENCE",
+  "noticeFile": "NOTICE",
+  "templates": [],
+  "modules": {
+    "web": "web/index.ts",
+    "server": "server/index.ts",
+    "android": "android/src/main/java",
+    "apple": "apple/Sources"
   }
 }

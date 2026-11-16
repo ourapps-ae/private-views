@@ -1,0 +1,13 @@
+import { assert, load } from './runtime.mjs';
+const m = await load('server/index.ts');
+const records = [{ ownerId: 'a', open: { name: 'A' }, hidden: { cards: ['As', 'Kd'], note: 'secret' }, revealed: { cards: [1] } }];
+const before = structuredClone(records);
+assert.deepEqual(m.redact('a', records)[0].cards, ['As', 'Kd']);
+assert.deepEqual(m.redact('b', records)[0].cards, [null, 'Kd']);
+assert.equal(m.redact(null, records)[0].note, null);
+assert.deepEqual(records, before);
+const web = await load('web/index.ts');
+const current = { roomId: 'r', version: 5, you: 'a' };
+assert.equal(web.accept({ ...current, version: 4 }, current, 'player'), current);
+assert.equal(web.accept({ ...current, version: 6, display: true }, current, 'player'), current);
+assert.equal(web.accept({ ...current, version: 6 }, current, 'player').version, 6);
