@@ -1,6 +1,6 @@
 {
   "name": "private-views",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "title": "Private views",
   "description": "Sends each viewer only what they may see, by a policy of hidden fields and reveal conditions.",
   "facilities": [
@@ -121,13 +121,17 @@
     {
       "reference": {
         "name": "ourapps-ae/private-views-class",
-        "version": "1.0.0",
-        "digest": "92705a0c0a3d88ee3059a88002e17a39a548cdb003618782e3c1be2f7015ed94"
+        "version": "1.1.0",
+        "digest": "258d4b952b2be04e7e7856b913719058fdec23ffa9a030b2c6eabf4a0e5c0f1e"
       },
       "descriptor": {
-        "format": 1,
+        "format": 2,
         "name": "ourapps-ae/private-views-class",
-        "version": "1.0.0",
+        "version": "1.1.0",
+        "title": "Private views",
+        "summary": "Each person sees only what they may see of shared state",
+        "category": "people-and-accounts/permissions",
+        "presentation": "none",
         "provides": [
           {
             "type": "ae/private-views",
@@ -209,8 +213,8 @@
   "implements": [
     {
       "name": "ourapps-ae/private-views-class",
-      "version": "1.0.0",
-      "digest": "92705a0c0a3d88ee3059a88002e17a39a548cdb003618782e3c1be2f7015ed94"
+      "version": "1.1.0",
+      "digest": "258d4b952b2be04e7e7856b913719058fdec23ffa9a030b2c6eabf4a0e5c0f1e"
     }
   ],
   "upstream": [],
@@ -221,7 +225,7 @@
       "ios": ">=17.0.0",
       "macos": ">=14.0.0",
       "tvos": ">=17.0.0",
-      "kotlin": "=2.3.20",
+      "kotlin": "=2.4.21",
       "java": ">=17.0.0 <27.0.0",
       "android": ">=8.0.0"
     },
@@ -496,5 +500,11 @@
         "manual": "Without the package manager, install Node 26 from nodejs.org (the installer, or the zip or tar archive with its folder put first on PATH); on Linux also from the NodeSource repository."
       }
     ]
-  }
+  },
+  "release": {
+    "channel": "features",
+    "fixes": []
+  },
+  "images": [],
+  "vulnerabilityWaivers": []
 }
